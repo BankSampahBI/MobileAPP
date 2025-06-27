@@ -1,0 +1,193 @@
+<resources>
+    <string name="app_name">BankSampah</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
+
+    <string-array name="jenis_sampah">
+        <item>Botol Kaca</item>
+        <item>Botol Plastik</item>
+        <item>Koran Bekas</item>
+        <item>Paralon</item>
+        <item>Tembaga</item>
+        <item>Tutup Galon</item>
+
+    </string-array>
+
+    <string-array name="deskripsi_sampah">
+        <item>Sampah botol kaca adalah limbah dari botol berbahan kaca yang sudah tidak digunakan. Botol ini bisa didaur ulang menjadi bahan baku kaca baru atau produk lainnya.</item>
+        <item>Sampah botol plastik berasal dari botol berbahan plastik yang telah habis pakai. Limbah ini perlu dipilah agar dapat diolah kembali menjadi produk plastik daur ulang.</item>
+        <item>Koran bekas merupakan limbah kertas cetak yang sudah tidak digunakan. Koran ini dapat dimanfaatkan kembali sebagai bahan dasar daur ulang kertas atau untuk keperluan lain seperti pembungkus.</item>
+        <item>Sampah paralon adalah limbah dari pipa paralon atau pipa PVC (Polyvinyl Chloride) yang sudah tidak terpakai. Pipa paralon umumnya digunakan untuk saluran air, tetapi setelah rusak atau tidak terpakai, ia menjadi sampah yang perlu dikelola.</item>
+        <item>Sampah tembaga adalah limbah logam dari kabel, pipa, atau peralatan elektronik yang mengandung tembaga. Limbah ini memiliki nilai ekonomis tinggi dan bisa dilebur kembali untuk digunakan ulang.</item>
+        <item>Tutup galon bekas adalah limbah dari penutup galon air minum yang terbuat dari plastik keras. Jika dipilah dengan benar, tutup ini bisa diolah kembali sebagai bahan baku daur ulang plastik.</item>
+    </string-array>
+
+    <string-array name="harga">
+        <item>Rp. 10.000</item>
+        <item>Rp. 8.000</item>
+        <item>Rp. 5.000</item>
+        <item>Rp. 10.000</item>
+        <item>Rp. 20.000</item>
+        <item>Rp. 9.000</item>
+    </string-array>
+
+    <string-array name="gambar_edukasi">
+        <item>botol_kaca</item>
+        <item>botol_plastik</item>
+        <item>koran</item>
+        <item>paralon</item>
+        <item>tembaga</item>
+        <item>tutup_galon</item>
+    </string-array>
+
+    <string-array name="message">
+        <item>Yeayy, Permintaan Penarikan Kamu Diterima!</item>
+        <item>Yeayy, Permintaan Penarikan Kamu Diterima!</item>
+        <item>Yeayy, Permintaan Penarikan Kamu Diterima!</item>
+        <item>Maaf, Permintaan Penarikan Kamu Ditolak!</item>
+    </string-array>
+
+
+    <string-array name="saldo_notif">
+        <item>Rp. 300.000</item>
+        <item>Rp. 280.000</item>
+        <item>Rp. 30.000</item>
+        <item>Gagal</item>
+    </string-array>
+
+    <string-array name="tanggal_penarikan">
+        <item>12 Juni 2025</item>
+        <item>14 Juni 2025</item>
+        <item>17 Juni 2025</item>
+        <item>19 Juni 2025</item>
+        <item>23 Juni 2025</item>
+    </string-array>
+
+    <string-array name="jumlah_penarikan">
+        <item>Rp. 300.000</item>
+        <item>Rp. 200.000</item>
+        <item>Rp. 150.000</item>
+        <item>Rp. 100.000</item>
+        <item>Rp. 100.000</item>
+    </string-array>
+
+    <string-array name="berat_sampah">
+        <item>2,5 Kg</item>
+        <item>5 Kg</item>
+        <item>1 Kg</item>
+        <item>2 Kg</item>
+        <item>4 Kg</item>
+        <item>7,5 Kg</item>
+    </string-array>
+
+    <string-array name="tanggal_penyetoran">
+        <item>12 Juni 2025</item>
+        <item>14 Juni 2025</item>
+        <item>17 Juni 2025</item>
+        <item>19 Juni 2025</item>
+        <item>23 Juni 2025</item>
+        <item>27 Juni 2025</item>
+    </string-array>
+
+    <string-array name="total_harga">
+        <item>Rp. 300.000</item>
+        <item>Rp. 200.000</item>
+        <item>Rp. 150.000</item>
+        <item>Rp. 100.000</item>
+        <item>Rp. 100.000</item>
+        <item>Rp. 660.000</item>
+    </string-array>
+
+    <string-array name="foto_berita">
+        <item>sampah3r</item>
+        <item>sampah_rumah_tangga</item>
+        <item>pengelolaan_sampah</item>
+    </string-array>
+
+    <string-array name="judul_berita">
+        <item>Mahasiswa KKN Undip Lakukan Sosialisasi Audio Visual, Edukasi Pengelolaan Sampah Berbasis 3R di Tengah PPKM</item>
+        <item>Pengelolaan Sampah di Indonesia</item>
+        <item>Privatisasi Pengelolaan Sampah: Peluang dan Tantangan</item>
+    </string-array>
+
+    <string-array name="isi_berita">
+        <item> Seiring berkembangnya pemukiman penduduk di wilayah Desa Jangli, peningkatan volume sampah pun jelas tidak dapat terhindari, terutama sampah organik. 
+
+Kurangnya kesadaran warga yang masih banyak membuang sampah sembarangan seperti di pinggir jalan, selokan maupun sungai, selain itu juga masih banyaknya warga yang membakar sampah di halaman rumah sehingga hal ini menimbulkan pencemaran udara, air, tanah, mengurangi estetika lingkungan, dan menimbulkan bau sehingga timbul vektor penyakit yang dapat mengganggu kesehatan warga.
+
+Mahasiswa KKN Undip melakukan edukasi terkait dengan "Pengelolaan Sampah Berbasis 3R" sebagai wujud nyata dari kegiatan Kuliah Kerja Nyata (KKN) Universitas Diponegoro dengan tema "Sinergi Perguruan Tinggi Dengan Masyarakat di Masa Pandemi Covid-19 Berbasis Pada Tujuan Pembangunan Berkelanjutan (SDGs) Melalui Kuliah Kerja Nyata" yang bertujuan untuk mengabdi kepada masyarakat, dan membantu pembangunan desa dengan memaksimalkan potensi desa.Ketatnya prosedur kegiatan pelaksanaan KKN regular sebagai akibat dari naiknya angka kasus Covid-19 di Indonesia tak terkecuali di Desa Jangli, mahasiswa perlu menyesuaikan program kerja sesuai dengan situasi dan kondisi yang ada sehingga diperlukan tekad yang kuat dan semangat yang tinggi untuk mengabdi kepada masyarakat meskipun dihadapkan dengan ruang gerak dan kondisi yang serba terbatas.
+
+Oleh karena itu, edukasi pengelolaan sampah berbasis 3R dilakukan secara audio-visual dengan tujuan agar dapat menambah minat masyarakat Desa Jangli untuk membaca dan menyimak informasi yang diberikan sebagai bagian dari upaya mengajak mayarakat menerapkan pengelolaan sampah berbasis 3R dengan tetap memperhatikan protokol kesehatan dan mematuhi PPKM yang telah ditetapkan pemerintah.
+
+Kegitan edukasi pengelolaan sampah berbasis 3R diawali dengan penempelan poster di sekitar wilayah Desa Jangli. Salah satu tempat yang menjadi objek penempelan poster edukasi pengelolaan sampah berbasis 3R yaitu di TPS Saptamarga Jangli. Selain dilakukan penempelan, poster juga dibagikan melalui sosial media seperti Facebook, Instagram dan Whatsapp.
+
+Kegiatan edukasi pengelolaan sampah berbasis 3R juga dilengkapi dengan penjelasan melalui video tentang tutorial membuat kompos cair dari sampah rumah tangga. Video tersebut kemudian dibagikan melalui sosial media dan ke warga jangli melalui pesan Whatsapp.
+
+Dengan adanya poster dan video tersebut diharapkan masyarakat dapat memahami pentingnya menjaga lingkungan sekitar dengan membuang sampah pada tempatnya, memilah sampah sesuai karakteristik dan jenis sampah serta dapat melakukan pengolahan sampah organik secara mandiri.
+
+        </item>
+        <item>Dalam kehidupan sehari-hari, kita cukup akrab dengan kata sampah. Tapi apa sih arti dari sampah itu sendiri? Menurut KBBI, sampah adalah barang atau benda yang dibuang karena tidak terpakai lagi. Sedangkan menurut UU Nomor 18 Tahun 2008 tentang Pengelolaan Sampah, yang dimaksud dengan sampah adalah sisa kegiatan sehari-hari manusia dan/atau proses alam yang berbentuk padat.
+
+            Sampah yang kita hasilkan biasanya kita buang ke tempat sampah dan kemudian kita bawa ke Tempat Penampungan Sementara (TPS). TPS yaitu tempat sebelum sampah diangkut ke tempat pendauran ulang, pengolahan, dan/atau tempat pengolahan sampah terpadu. Dari TPS, sampah akan diangkut dan dibawa oleh Dinas Lingkungan menggunakan truk sampah ke Tempat Pemrosesan Akhir (TPA). TPA adalah tempat untuk memproses dan mengembalikan sampah ke media lingkungan secara aman bagi manusia dan lingkungan.
+
+Sampah yang dikelola berdasarkan UU Nomor 18 Tahun 2008 terdiri atas sampah rumah tangga (berasal dari kegiatan sehari-hari dalam rumah tangga, tidak termasuk tinja, dan sampah spesifik), sampah sejenis sampah rumah tangga (berasal dari kawasan komersial, kawasan industri, kawasan khusus, fasilitas sosial, fasilitas umum, dan fasilitas lainnya), dan sampah spesifik (sampah yang mengandung bahan berbahaya dan beracun, sampah yang mengandung limbah bahan berbahaya dan beracun, sampah yang timbul akibat bencana, puing bongkaran bangunan, sampah yang secara teknologi belum dapat diolah dan/atau sampah yang timbul secara tidak periodik)
+
+Pengelolaan sampah di Indonesia dibagi menjadi dua, pertama yaitu pengelolaan sampah rumah tangga dan sampah sejenis sampah rumah tangga dan kedua yaitu pengelolaan sampah spesifik. Pengelolaan sampah spesifik adalah tanggung jawab pemerintah, sedangkan pengelolaan sampah rumah tangga dan sampah sejenis sampah rumah tangga terdiri atas pengurangan sampah dan penanganan sampah, pengurangan sampah yang meliputi pembatasan timbulan sampah, pendauran ulang sampah, dan pemanfaatan kembali sampah. Dalam hal ini, pemerintah pusat, pemerintah daerah, pelaku usaha, dan masyarakat memiliki perannya masing-masing.
+
+Kegiatan penanganan sampah meliputi : pemilahan sampah sesuai jenis, jumlah, dan/atau sifatnya; pengumpulan sampah ke tempat pengolahan residu; pengangkutan sampah dari tempat pengolahan residu ke TPA; pengolahan sampah dalam bentuk mengubah karakteristik, komposisi, dan jumlah sampah; dan pemrosesan akhir dalam bentuk pengembalian sampah dan/atau residu hasil pengolahan sebelumnya ke media lingkungan secara aman.
+
+Pemerintah pusat dan pemerintah daerah wajib membiayai penyelenggaraan pengelolaan sampah, pembiayaan tersebut berasal dari APBN dan APBD. Pemerintah pusat dan pemerintah daerah secara sendiri-sendiri atau bersama-sama dapat memberikan kompensasi kepada masyarakat sebagai akibat dampak negatif yang ditimbulkan oleh kegiatan penanganan sampah di tempat pemrosesan akhir sampah. Kompensasi yang dimaksud berupa relokasi, pemulihan lingkungan, biaya kesehatan, pengobatan, dan kompensasi dalam bentuk lain.
+
+Masyarakat dapat berperan dalam pengelolaan sampah yang diselenggarakan oleh pemerintah pusat dan pemerintah daerah. Peran masyarakat antara lain pemberian usul, pertimbangan, dan saran kepada pemerintah pusat dan pemerintah daerah, perumusan kebijakan pengelolaan sampah, dan/atau pemberian saran dan pendapat dalam penyelesaian sengketa persampahan.
+
+Nah, sekarang kita sudah mengetahui bagaimana pengelolaan sampah di Indonesia secara garis besar. Mari kita jaga kebersihan lingkungan kita dengan senantiasa membuang sampah pada tempatnya dan mengurangi produksi sampah dalam kehidupan kita sehari hari.
+        </item>
+        <item>Kota-kota di negara berkembang menjadi pusat utama pertumbuhan ekonomi, menyumbang hingga 80% dari PDB meskipun hanya dihuni oleh sebagian kecil populasi negara. Namun, pertumbuhan pesat ini memunculkan berbagai permasalahan sosial dan lingkungan, seperti kemacetan, pencemaran, dan keterbatasan layanan publik akibat urbanisasi yang tidak seimbang dengan kapasitas infrastruktur. Salah satu tantangan utama adalah pengelolaan sampah yang buruk, yang dapat menimbulkan ancaman kesehatan dan kerusakan lingkungan. Untuk mengatasi hal tersebut, muncullah pendekatan kolaboratif seperti Kemitraan Pemerintah-Swasta (KPS) yang melibatkan sektor swasta dan komunitas dalam pengelolaan sampah. Hasil kajian literatur menunjukkan bahwa privatisasi pengelolaan sampah membawa sejumlah manfaat, antara lain efisiensi layanan, penghematan biaya, akses terhadap teknologi dan pendanaan, penciptaan lapangan kerja, serta meningkatnya partisipasi masyarakat. Namun, terdapat pula dampak negatif seperti hilangnya pekerjaan di sektor publik, praktik diskriminatif, monopoli, korupsi, dan penurunan kualitas lingkungan akibat pengelolaan yang tidak optimal. Tantangan yang dihadapi mencakup kurangnya dukungan politik dan publik, keterbatasan infrastruktur, rendahnya tingkat daur ulang, ketidaksempurnaan pasar, dan terbatasnya akses masyarakat miskin terhadap layanan penting. Oleh karena itu, meskipun privatisasi memiliki potensi besar, keberhasilannya sangat bergantung pada peran aktif pemerintah dalam pengawasan, transparansi, serta dukungan institusional yang kuat.
+        </item>
+    </string-array>
+</resources>

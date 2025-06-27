@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Saat item aktif/dipilih -->
+    <item android:state_checked="true" android:color="@color/orange" />
+    <!-- Saat item ditekan (opsional, jika ingin animasi tekan berbeda) -->
+    <item android:state_pressed="true" android:color="@color/orange" />
+    <!-- Warna default (belum diklik) -->
+    <item android:color="@android:color/white" />
+</selector>

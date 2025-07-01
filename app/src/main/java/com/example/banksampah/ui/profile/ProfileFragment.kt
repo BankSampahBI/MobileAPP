@@ -1,5 +1,6 @@
 package com.example.banksampah.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.banksampah.databinding.FragmentProfileBinding
+import com.example.banksampah.ui.Model.ViewModelFactory
+import com.example.banksampah.ui.StartActivity
 
 class ProfileFragment : Fragment() {
+
+    private lateinit var profileViewModel: ProfileViewModel
 
     private var _binding: FragmentProfileBinding? = null
 
@@ -21,8 +26,13 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
+
+        profileViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory.getInstance(requireContext())
+        )[ProfileViewModel::class.java]
+
+
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -33,6 +43,19 @@ class ProfileFragment : Fragment() {
 //        }
         return root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnLogout.setOnClickListener {
+            profileViewModel.logout()
+            val intent = Intent(requireContext(), StartActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            requireActivity().finish()
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -13,7 +13,6 @@ import com.example.banksampah.MainActivity
 import com.example.banksampah.R
 import com.example.banksampah.ui.Model.RiwayatPenarikan
 import com.example.banksampah.ui.adapter.ListRiwayatPenarikanAdapter
-import com.example.banksampah.ui.autentikasi.RegisterActivity
 
 class RiwayatPenarikanActivity : AppCompatActivity() {
 

@@ -34,7 +34,7 @@
             android:name=".ui.detail.DetailBeritaActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detail.DetailEdukasiActivity"
+            android:name=".ui.detail.DetailKatalogActivity"
             android:exported="false" />
         <activity
             android:name=".ui.StartActivity"

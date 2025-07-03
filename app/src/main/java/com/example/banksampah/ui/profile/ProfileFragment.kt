@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.banksampah.databinding.FragmentProfileBinding
-import com.example.banksampah.ui.Model.ViewModelFactory
+import com.example.banksampah.ui.model.ViewModelFactory
 import com.example.banksampah.ui.StartActivity
 
 class ProfileFragment : Fragment() {

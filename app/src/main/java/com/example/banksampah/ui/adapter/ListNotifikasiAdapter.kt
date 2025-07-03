@@ -1,16 +1,12 @@
 package com.example.banksampah.ui.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.banksampah.R
-import com.example.banksampah.ui.Model.Edukasi
-import com.example.banksampah.ui.Model.Notifikasi
-import com.example.banksampah.ui.detail.DetailEdukasiActivity
+import com.example.banksampah.ui.model.Notifikasi
 
 class ListNotifikasiAdapter(private val listNotikasi: ArrayList<Notifikasi>) : RecyclerView.Adapter<ListNotifikasiAdapter.ListViewHolder>() {
 

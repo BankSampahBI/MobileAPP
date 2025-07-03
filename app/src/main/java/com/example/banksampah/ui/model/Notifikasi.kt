@@ -1,4 +1,4 @@
-package com.example.banksampah.ui.Model
+package com.example.banksampah.ui.model
 
 data class Notifikasi(
     val pesan :String,

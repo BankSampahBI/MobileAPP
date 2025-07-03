@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.banksampah.MainActivity
 import com.example.banksampah.R
-import com.example.banksampah.ui.Model.RiwayatPenarikan
+import com.example.banksampah.ui.model.RiwayatPenarikan
 import com.example.banksampah.ui.adapter.ListRiwayatPenarikanAdapter
 
 class RiwayatPenarikanActivity : AppCompatActivity() {

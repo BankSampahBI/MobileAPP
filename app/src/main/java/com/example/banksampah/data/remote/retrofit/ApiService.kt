@@ -1,5 +1,6 @@
 package com.example.banksampah.data.remote.retrofit
 
+import com.example.banksampah.data.remote.response.KatalogResponse
 import com.example.banksampah.data.remote.response.LoginResponse
 import com.example.banksampah.data.remote.response.RegisterResponse
 import retrofit2.http.*
@@ -21,4 +22,7 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): LoginResponse
+
+    @GET("api/katalog")
+    suspend fun getKatalog(): KatalogResponse
 }

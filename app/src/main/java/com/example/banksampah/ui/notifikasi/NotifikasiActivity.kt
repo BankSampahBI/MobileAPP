@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.banksampah.MainActivity
 import com.example.banksampah.R
-import com.example.banksampah.ui.Model.Notifikasi
+import com.example.banksampah.ui.model.Notifikasi
 import com.example.banksampah.ui.adapter.ListNotifikasiAdapter
-import com.example.banksampah.ui.riwayat.RiwayatPenyetoranActivity
 
 class NotifikasiActivity : AppCompatActivity() {
 

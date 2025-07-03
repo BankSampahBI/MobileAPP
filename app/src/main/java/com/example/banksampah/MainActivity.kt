@@ -8,11 +8,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.banksampah.databinding.ActivityMainBinding
-import com.example.banksampah.ui.Model.MainViewModel
-import com.example.banksampah.ui.Model.ViewModelFactory
+import com.example.banksampah.ui.model.MainViewModel
+import com.example.banksampah.ui.model.ViewModelFactory
 import com.example.banksampah.ui.StartActivity
 
 class MainActivity : AppCompatActivity() {

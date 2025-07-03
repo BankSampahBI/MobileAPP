@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.banksampah.MainActivity
 import com.example.banksampah.R
-import com.example.banksampah.ui.Model.Berita
+import com.example.banksampah.ui.model.Berita
 
 class DetailBeritaActivity : AppCompatActivity() {
 

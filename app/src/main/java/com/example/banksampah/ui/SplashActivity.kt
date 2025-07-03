@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.banksampah.MainActivity
 import com.example.banksampah.R
-import com.example.banksampah.ui.Model.ViewModelFactory
+import com.example.banksampah.ui.model.ViewModelFactory
 import com.example.banksampah.ui.autentikasi.login.LoginViewModel
 
 class SplashActivity : AppCompatActivity() {

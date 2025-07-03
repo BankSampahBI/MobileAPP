@@ -9,9 +9,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.banksampah.MainActivity
 import com.example.banksampah.R
-import com.example.banksampah.ui.Model.RiwayatPenyetoran
+import com.example.banksampah.ui.model.RiwayatPenyetoran
 import com.example.banksampah.ui.adapter.ListRiwayatPenyetoranAdapter
 
 class RiwayatPenyetoranActivity : AppCompatActivity() {

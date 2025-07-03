@@ -16,7 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.banksampah.data.Result
 import com.example.banksampah.databinding.ActivityRegisterBinding
-import com.example.banksampah.ui.Model.ViewModelFactory
+import com.example.banksampah.ui.model.ViewModelFactory
 import com.example.banksampah.ui.autentikasi.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {

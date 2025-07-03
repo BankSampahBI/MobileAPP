@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.banksampah.R
-import com.example.banksampah.ui.Model.Notifikasi
-import com.example.banksampah.ui.Model.RiwayatPenarikan
+import com.example.banksampah.ui.model.RiwayatPenarikan
 
 class ListRiwayatPenarikanAdapter (private val listRiwayatPenarikan: ArrayList<RiwayatPenarikan>) : RecyclerView.Adapter<ListRiwayatPenarikanAdapter.ListViewHolder>() {
 

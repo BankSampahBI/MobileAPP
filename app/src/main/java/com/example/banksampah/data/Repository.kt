@@ -4,10 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.banksampah.data.pref.UserPreference
+import com.example.banksampah.data.remote.response.DataItem
 import com.example.banksampah.data.remote.response.LoginResponse
 import com.example.banksampah.data.remote.response.RegisterResponse
 import com.example.banksampah.data.remote.retrofit.ApiService
-import com.example.banksampah.ui.Model.UserModel
+import com.example.banksampah.ui.model.UserModel
 import kotlinx.coroutines.flow.Flow
 
 class Repository(
@@ -41,7 +42,12 @@ class Repository(
     fun login(email: String, password: String): LiveData<Result<LoginResponse>> = liveData {
         try {
             val response = apiService.login(email, password)
-            val userModel = UserModel(email, response.token, true)
+            val userModel = UserModel(
+                name = response.user.name,
+                email = response.user.email,
+                token = "Bearer ${response.token}",
+                isLogin = true
+            )
             saveSession(userModel)
             emit(Result.Success(response))
         } catch (e: Exception) {
@@ -50,6 +56,16 @@ class Repository(
         }
     }
 
+    fun getKatalog(): LiveData<Result<List<DataItem>>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getKatalog()
+            emit(Result.Success(response.data))
+        } catch (e: Exception) {
+            Log.e("Katalog", "Error: ${e.message}")
+            emit(Result.Error(e.message.toString()))
+        }
+    }
 
     companion object {
         @Volatile

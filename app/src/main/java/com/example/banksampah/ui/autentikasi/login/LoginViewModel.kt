@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.banksampah.data.Repository
-import com.example.banksampah.ui.Model.UserModel
+import com.example.banksampah.ui.model.UserModel
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: Repository) : ViewModel() {

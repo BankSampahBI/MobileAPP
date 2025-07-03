@@ -8,8 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.banksampah.R
-import com.example.banksampah.ui.Model.Berita
-import com.example.banksampah.ui.Model.Notifikasi
+import com.example.banksampah.ui.model.Berita
 import com.example.banksampah.ui.detail.DetailBeritaActivity
 
 class ListBeritaAdapter(private val listBerita: ArrayList<Berita>) : RecyclerView.Adapter<ListBeritaAdapter.ListViewHolder>() {

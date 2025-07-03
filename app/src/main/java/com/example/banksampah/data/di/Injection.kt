@@ -12,4 +12,7 @@ object Injection {
         val apiService = ApiConfig.getApiService()
         return Repository.getInstance(pref, apiService)
     }
+    fun provideUserPreference(context: Context): UserPreference {
+        return UserPreference.getInstance(context.dataStore)
+    }
 }

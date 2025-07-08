@@ -8,12 +8,13 @@ import com.example.banksampah.data.pref.UserPreference
 import com.example.banksampah.data.di.Injection
 import com.example.banksampah.ui.autentikasi.login.LoginViewModel
 import com.example.banksampah.ui.autentikasi.register.RegisterViewModel
+import com.example.banksampah.ui.cart.CartViewModel
 import com.example.banksampah.ui.home.HomeViewModel
 import com.example.banksampah.ui.profile.ProfileViewModel
 
 class ViewModelFactory(
-    private val repository: Repository,
-    private val userPreference: UserPreference
+    private val repository: Repository
+
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -39,7 +40,14 @@ class ViewModelFactory(
                 HomeViewModel(repository) as T
             }
 
-            else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
+            modelClass.isAssignableFrom(CartViewModel::class.java) -> {
+                CartViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(AddPenjualanViewModel::class.java) -> {
+                AddPenjualanViewModel(repository) as T
+            }
+
+            else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
     }
 
@@ -49,14 +57,11 @@ class ViewModelFactory(
 
         @JvmStatic
         fun getInstance(context: Context): ViewModelFactory {
-            if (INSTANCE == null) {
-                synchronized(ViewModelFactory::class.java) {
-                    val repo = Injection.provideRepository(context)
-                    val pref = Injection.provideUserPreference(context)
-                    INSTANCE = ViewModelFactory(repo, pref)
-                }
+            return INSTANCE ?: synchronized(this) {
+                val repo = Injection.provideRepository(context)
+                val pref = Injection.provideUserPreference(context)
+                ViewModelFactory(repo).also { INSTANCE = it }
             }
-            return INSTANCE as ViewModelFactory
         }
     }
 }

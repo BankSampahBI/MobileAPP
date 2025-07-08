@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.cart.CartFragment">
 
+    <!-- Foto profil -->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView2"
         android:layout_width="70dp"
@@ -16,11 +18,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Halo + Username -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:orientation="horizontal"
         app:layout_constraintStart_toEndOf="@+id/circleImageView2"
         app:layout_constraintTop_toTopOf="@+id/circleImageView2">
 
@@ -28,9 +32,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Hallo,"
+            android:text="Hallo, "
             android:textColor="@color/black"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tv_username"
@@ -39,9 +43,10 @@
             android:fontFamily="@font/poppins_bold"
             android:text=" Jaka"
             android:textColor="@color/black"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
     </LinearLayout>
 
+    <!-- Alamat -->
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
@@ -49,9 +54,10 @@
         android:fontFamily="@font/poppins_regular"
         android:text="Jl.Tubagus Ismail Dalam no 27 A"
         android:textColor="@color/black"
-        android:textSize="14dp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
 
     <ImageView
         android:id="@+id/btn_notification"
@@ -63,4 +69,61 @@
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Belum ada penjualan"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
+        android:visibility="gone"
+        android:textSize="16sp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/textView8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Judul sebelum RecyclerView -->
+    <TextView
+        android:id="@+id/tv_heading_penjualan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Barang yang Anda Jual"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_empty"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Daftar Penjualan -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_penjualan"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_heading_penjualan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/list_item_penjualan" />
+
+    <!-- FAB Tambah -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_penjualan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:layout_marginEnd="25dp"
+        android:src="@drawable/ic_add"
+        android:contentDescription="Tambah Barang"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

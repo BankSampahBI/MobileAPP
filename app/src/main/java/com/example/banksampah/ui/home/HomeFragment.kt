@@ -1,4 +1,3 @@
-// HomeFragment.kt
 package com.example.banksampah.ui.home
 
 import android.content.Intent
@@ -16,31 +15,28 @@ import com.example.banksampah.R
 import com.example.banksampah.data.Result
 import com.example.banksampah.ui.adapter.ListBeritaAdapter
 import com.example.banksampah.ui.adapter.ListKatalogAdapter
-import com.example.banksampah.ui.model.Berita
 import com.example.banksampah.ui.model.ViewModelFactory
 import com.example.banksampah.ui.notifikasi.NotifikasiActivity
 import com.example.banksampah.ui.penarikan.PenarikanActivity
 import com.example.banksampah.ui.riwayat.RiwayatPenarikanActivity
-
 
 class HomeFragment : Fragment() {
 
     private lateinit var rvKatalog: RecyclerView
     private lateinit var rvBerita: RecyclerView
     private lateinit var katalogAdapter: ListKatalogAdapter
+    private lateinit var beritaAdapter: ListBeritaAdapter
 
     private val viewModel: HomeViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_home, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val tvUsername: TextView = view.findViewById(R.id.tv_username)
 
@@ -48,6 +44,7 @@ class HomeFragment : Fragment() {
             tvUsername.text = " ${user.name}"
         }
 
+        // Katalog
         rvKatalog = view.findViewById(R.id.rv_katalog)
         rvKatalog.layoutManager = LinearLayoutManager(requireContext())
         katalogAdapter = ListKatalogAdapter()
@@ -61,9 +58,19 @@ class HomeFragment : Fragment() {
             }
         }
 
+        // Berita
         rvBerita = view.findViewById(R.id.rv_berita)
         rvBerita.layoutManager = LinearLayoutManager(requireContext())
-        rvBerita.adapter = ListBeritaAdapter(getListBeritaFromResources())
+        beritaAdapter = ListBeritaAdapter(arrayListOf())
+        rvBerita.adapter = beritaAdapter
+
+        viewModel.getBerita().observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {}
+                is Result.Success -> beritaAdapter.setData(result.data)
+                is Result.Error -> Toast.makeText(requireContext(), "Gagal memuat berita", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         view.findViewById<View>(R.id.btn_notification).setOnClickListener {
             startActivity(Intent(requireContext(), NotifikasiActivity::class.java))
@@ -74,16 +81,5 @@ class HomeFragment : Fragment() {
         view.findViewById<View>(R.id.btn_riwayat).setOnClickListener {
             startActivity(Intent(requireContext(), RiwayatPenarikanActivity::class.java))
         }
-    }
-
-    private fun getListBeritaFromResources(): ArrayList<Berita> {
-        val context = requireContext()
-        val judulArray = resources.getStringArray(R.array.judul_berita)
-        val isiArray = resources.getStringArray(R.array.isi_berita)
-        val gambarArray = resources.getStringArray(R.array.foto_berita)
-        return ArrayList(judulArray.indices.map { i ->
-            val resId = resources.getIdentifier(gambarArray[i], "drawable", context.packageName)
-            Berita(resId, judulArray[i], isiArray[i])
-        })
     }
 }

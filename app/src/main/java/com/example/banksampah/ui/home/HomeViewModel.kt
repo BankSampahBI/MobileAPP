@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.banksampah.data.Repository
 import com.example.banksampah.data.Result
+import com.example.banksampah.data.remote.response.BeritaItem
 import com.example.banksampah.data.remote.response.DataItem
 import com.example.banksampah.ui.model.UserModel
 
@@ -15,6 +16,9 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     }
     fun getKatalog(): LiveData<Result<List<DataItem>>> {
         return repository.getKatalog()
+    }
+    fun getBerita(): LiveData<Result<List<BeritaItem>>> {
+        return repository.getBerita()
     }
 
 }

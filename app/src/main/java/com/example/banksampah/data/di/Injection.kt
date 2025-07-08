@@ -9,9 +9,16 @@ import com.example.banksampah.data.remote.retrofit.ApiConfig
 object Injection {
     fun provideRepository(context: Context): Repository {
         val pref = UserPreference.getInstance(context.dataStore)
-        val apiService = ApiConfig.getApiService()
+        val apiService = ApiConfig.getApiService() // tanpa token
         return Repository.getInstance(pref, apiService)
     }
+
+    fun provideRepository(context: Context, token: String): Repository {
+        val pref = UserPreference.getInstance(context.dataStore)
+        val apiService = ApiConfig.getApiService(token) // pakai token
+        return Repository(pref, apiService) // bypass singleton
+    }
+
     fun provideUserPreference(context: Context): UserPreference {
         return UserPreference.getInstance(context.dataStore)
     }

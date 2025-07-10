@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/layoutRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Judul -->
+        <TextView
+            android:id="@+id/tvJudul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detail Penjualan"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Gambar Barang -->
+        <ImageView
+            android:id="@+id/img_barang"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/botol_kaca" />
+
+        <!-- Nama Barang -->
+        <TextView
+            android:id="@+id/tvNamaBarang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama Barang"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Deskripsi -->
+        <TextView
+            android:id="@+id/tvDeskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi barang..."
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Stok -->
+        <TextView
+            android:id="@+id/tvStok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stok: 0"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Harga -->
+        <TextView
+            android:id="@+id/tvHarga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Harga: Rp 0"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Status -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status: -"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Catatan Admin (hanya jika ditolak) -->
+        <TextView
+            android:id="@+id/tvCatatanAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Catatan Admin: -"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="italic"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Tombol Edit -->
+        <!-- Tombol Edit -->
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Penjualan"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Tombol Hapus -->
+        <Button
+            android:id="@+id/btnHapus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hapus Penjualan"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:textColor="@android:color/white" />
+
+
+    </LinearLayout>
+</ScrollView>

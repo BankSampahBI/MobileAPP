@@ -1,5 +1,6 @@
 package com.example.banksampah.ui.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.banksampah.R
 import com.example.banksampah.data.remote.response.PenjualanResponseItem
+import com.example.banksampah.ui.detail.DetailPenjualanActivity
 
 class ListPenjualanAdapter(private val list: List<PenjualanResponseItem>) :
     RecyclerView.Adapter<ListPenjualanAdapter.ViewHolder>() {
@@ -32,10 +34,11 @@ class ListPenjualanAdapter(private val list: List<PenjualanResponseItem>) :
         val item = list[position]
         holder.nama.text = item.namaBarang
         holder.harga.text = "Rp ${item.harga}"
-        holder.status.text = when (item.status) {
+        holder.status.text = when (item.status.lowercase()) {
+            "diterima", "ditampilkan" -> "✅ Diterima"
+            "menunggu", "menunggu_validasi" -> "⏳ Menunggu Validasi"
             "ditolak" -> "❌ Ditolak"
-            "diterima" -> "✅ Diterima"
-            else -> "⏳ Menunggu Validasi"
+            else -> item.status
         }
 
         if (!item.foto.isNullOrEmpty()) {
@@ -46,5 +49,12 @@ class ListPenjualanAdapter(private val list: List<PenjualanResponseItem>) :
         } else {
             holder.foto.setImageResource(R.drawable.botol_kaca) // default image kalau kosong
         }
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, DetailPenjualanActivity::class.java)
+            intent.putExtra("EXTRA_PENJUALAN", item)
+            holder.itemView.context.startActivity(intent)
+        }
+
+
     }
 }

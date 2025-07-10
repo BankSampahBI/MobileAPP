@@ -2,6 +2,7 @@ package com.example.banksampah.ui.cart
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.example.banksampah.databinding.FragmentCartBinding
 import com.example.banksampah.ui.adapter.ListPenjualanAdapter
 import com.example.banksampah.ui.add.AddPenjualanActivity
 import com.example.banksampah.ui.model.ViewModelFactory
+import com.example.banksampah.data.remote.response.PenjualanResponseItem
 
 class CartFragment : Fragment() {
 
@@ -54,21 +56,37 @@ class CartFragment : Fragment() {
                 // observe penjualan
                 cartViewModel.penjualan.observe(viewLifecycleOwner) { result ->
                     when (result) {
-                        is Result.Loading -> { /* tampilkan loading */ }
+                        is Result.Loading -> {
+                            // tampilkan loading jika perlu
+                        }
                         is Result.Success -> {
                             val list = result.data
-                            if (list.isNotEmpty()) {
-                                binding.tvEmpty.visibility = View.GONE
 
-                                // FIX: set layout manager terlebih dulu!
+                            // Debug status
+                            list.forEach {
+                                Log.d("StatusCheck", "Item: ${it.namaBarang}, status: ${it.status}")
+                            }
+
+                            // Urutkan: diterima (0), menunggu (1), ditolak (2), lain (3)
+                            val sortedList = list.sortedWith(compareBy<PenjualanResponseItem> {
+                                when (it.status.lowercase()) {
+                                    "diterima", "ditampilkan" -> 0
+                                    "menunggu", "menunggu_validasi" -> 1
+                                    "ditolak" -> 2
+                                    else -> 3
+                                }
+                            }.thenByDescending { it.createdAt })
+
+                            if (sortedList.isNotEmpty()) {
+                                binding.tvEmpty.visibility = View.GONE
                                 binding.rvPenjualan.layoutManager = LinearLayoutManager(requireContext())
-                                binding.rvPenjualan.adapter = ListPenjualanAdapter(list)
+                                binding.rvPenjualan.adapter = ListPenjualanAdapter(sortedList)
                             } else {
                                 binding.tvEmpty.visibility = View.VISIBLE
                             }
                         }
                         is Result.Error -> {
-                            binding.tvEmpty.text = "Gagal memuat data"
+                            binding.tvEmpty.text = "Gagal Memuat Data"
                             binding.tvEmpty.visibility = View.VISIBLE
                         }
                     }

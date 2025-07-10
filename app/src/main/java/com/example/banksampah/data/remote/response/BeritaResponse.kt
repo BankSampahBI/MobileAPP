@@ -17,10 +17,10 @@ data class BeritaItem(
 	val foto: String,
 
 	@field:SerializedName("updated_at")
-	val updatedAt: String,
+	val updatedAt: String? = null,
 
 	@field:SerializedName("created_at")
-	val createdAt: String,
+	val createdAt: String? = null,
 
 	@field:SerializedName("id")
 	val id: Int,

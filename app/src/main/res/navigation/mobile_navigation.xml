@@ -2,8 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    android:id="@+id/mobile_navigation">
+
+    <!-- === Fragment untuk Nasabah === -->
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.banksampah.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_cart"
@@ -11,12 +17,20 @@
         android:label="@string/cart"
         tools:layout="@layout/fragment_cart" />
 
+    <!-- === Fragment untuk Konsumen === -->
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.banksampah.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_konsumen_home"
+        android:name="com.example.banksampah.ui.home.KonsumenHomeFragment"
+        android:label="Home Konsumen"
+        tools:layout="@layout/fragment_konsumen_home" />
 
+    <fragment
+        android:id="@+id/navigation_konsumen_cart"
+        android:name="com.example.banksampah.ui.cart.KonsumenCartFragment"
+        android:label="Cart Konsumen"
+        tools:layout="@layout/fragment_konsumen_cart" />
+
+    <!-- === Fragment yang Sama (Profile) === -->
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.banksampah.ui.profile.ProfileFragment"

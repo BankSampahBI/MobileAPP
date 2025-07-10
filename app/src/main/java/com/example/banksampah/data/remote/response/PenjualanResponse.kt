@@ -1,6 +1,8 @@
 package com.example.banksampah.data.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 
 class PenjualanResponse (
@@ -8,9 +10,10 @@ class PenjualanResponse (
 	val data: List<PenjualanResponseItem>
 )
 
+@Parcelize
 data class PenjualanResponseItem(
 	@SerializedName("catatan_admin")
-	val catatanAdmin: Any?,
+	val catatanAdmin: String?,
 
 	@SerializedName("harga")
 	val harga: Int,
@@ -41,4 +44,4 @@ data class PenjualanResponseItem(
 
 	@SerializedName("status")
 	val status: String
-)
+):Parcelable

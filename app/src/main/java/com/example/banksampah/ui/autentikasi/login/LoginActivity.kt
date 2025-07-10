@@ -79,19 +79,18 @@ class LoginActivity : AppCompatActivity() {
                     is Result.Success -> {
                         binding.progresBar.visibility = View.GONE
 
-                        // ✅ Cek jika admin, tampilkan toast & hentikan
                         if (result.data.user.role == "admin") {
                             Toast.makeText(this, "Akun admin hanya bisa login lewat web!", Toast.LENGTH_LONG).show()
                             return@observe
                         }
 
-                        // ✅ Lanjutkan jika bukan admin
                         val token = AUTH + result.data.token
                         val userModel = UserModel(
                             name = result.data.user.name,
                             email = result.data.user.email,
                             token = token,
-                            isLogin = true
+                            isLogin = true,
+                            role = result.data.user.role // Simpan role juga
                         )
 
                         loginViewModel.saveSession(userModel)

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.banksampah.data.pref.UserPreference
 import com.example.banksampah.data.remote.response.BeritaItem
+import com.example.banksampah.data.remote.response.DataBarangResponse
 import com.example.banksampah.data.remote.response.DataItem
 import com.example.banksampah.data.remote.response.LoginResponse
 import com.example.banksampah.data.remote.response.PenjualanResponseItem
@@ -13,11 +14,12 @@ import com.example.banksampah.data.remote.retrofit.ApiConfig
 import com.example.banksampah.data.remote.retrofit.ApiService
 import com.example.banksampah.ui.model.UserModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import retrofit2.Response
 import java.io.File
 
 class Repository(
@@ -131,6 +133,64 @@ class Repository(
             emit(Result.Error(e.message ?: "Gagal submit penjualan"))
         }
     }
+
+    fun updatePenjualan(
+        token: String,
+        id: Int,
+        nama: String,
+        deskripsi: String,
+        stok: Int,
+        harga: Int,
+        foto: File?
+    ): LiveData<Result<Any>> = liveData {
+        emit(Result.Loading)
+        try {
+            val methodPart = "PUT".toRequestBody("text/plain".toMediaTypeOrNull())
+            val namaPart = nama.toRequestBody("text/plain".toMediaTypeOrNull())
+            val deskripsiPart = deskripsi.toRequestBody("text/plain".toMediaTypeOrNull())
+            val stokPart = stok.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val hargaPart = harga.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+
+            val fotoPart = foto?.let {
+                val reqFile = it.asRequestBody("image/*".toMediaTypeOrNull())
+                MultipartBody.Part.createFormData("foto", it.name, reqFile)
+            }
+
+            val apiServiceWithToken = ApiConfig.getApiService(token)
+
+            val response = apiServiceWithToken.updatePenjualan(
+                id = id,
+                method = methodPart,  // <- ini penting
+                nama = namaPart,
+                deskripsi = deskripsiPart,
+                stok = stokPart,
+                harga = hargaPart,
+                foto = fotoPart
+            )
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message ?: "Gagal update penjualan"))
+        }
+    }
+
+    suspend fun deletePenjualan(token: String, id: Int): Result<String> {
+        return try {
+            val response = apiService.deletePenjualan("Bearer $token", id)
+            if (response.isSuccessful) {
+                val message = JSONObject(response.body()?.string() ?: "").optString("message", "Berhasil dihapus")
+                Result.Success(message)
+            } else {
+                Result.Error(response.message())
+            }
+        } catch (e: Exception) {
+            Result.Error(e.message ?: "Terjadi kesalahan")
+        }
+    }
+
+    suspend fun getBarangValid(token: String): Response<DataBarangResponse> {
+        return apiService.getPenjualanValid(token)
+    }
+
 
 
     companion object {

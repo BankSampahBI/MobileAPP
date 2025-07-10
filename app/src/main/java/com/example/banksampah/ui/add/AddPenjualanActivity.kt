@@ -1,39 +1,42 @@
 package com.example.banksampah.ui.add
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import com.bumptech.glide.Glide
 import com.example.banksampah.data.Result
 import com.example.banksampah.data.di.Injection
 import com.example.banksampah.databinding.ActivityAddPenjualanBinding
 import com.example.banksampah.ui.model.AddPenjualanViewModel
 import com.example.banksampah.ui.model.ViewModelFactory
+import com.example.banksampah.utils.uriToFile
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddPenjualanActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddPenjualanBinding
     private lateinit var viewModel: AddPenjualanViewModel
     private lateinit var token: String
-    private var selectedImageFile: File? = null
 
-    private val pickImageLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
-            val imageUri = result.data!!.data
-            imageUri?.let {
-                selectedImageFile = uriToFile(it)
-                binding.imgPreview.setImageURI(it)
-            }
-        }
+    private var selectedImageFile: File? = null
+    private var cameraImageFile: File? = null
+    private var currentPhotoPath: String? = null
+
+    companion object {
+        private const val REQUEST_CAMERA = 101
+        private const val REQUEST_GALLERY = 102
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +44,7 @@ class AddPenjualanActivity : AppCompatActivity() {
         binding = ActivityAddPenjualanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Ambil token dan setup ViewModel
         Injection.provideUserPreference(this).getSession().asLiveData()
             .observe(this) { user ->
                 token = user.token
@@ -49,9 +53,7 @@ class AddPenjualanActivity : AppCompatActivity() {
             }
 
         binding.btnPilihFoto.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "image/*"
-            pickImageLauncher.launch(intent)
+            showImagePickerDialog()
         }
 
         binding.btnSubmit.setOnClickListener {
@@ -69,10 +71,7 @@ class AddPenjualanActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val total = stok * harga
-
             viewModel.submitPenjualan(token, jenis, deskripsi, stok, harga, foto)
-
                 .observe(this) { result ->
                     when (result) {
                         is Result.Loading -> Toast.makeText(this, "Mengirim data...", Toast.LENGTH_SHORT).show()
@@ -86,13 +85,84 @@ class AddPenjualanActivity : AppCompatActivity() {
         }
     }
 
-    private fun uriToFile(uri: Uri): File {
-        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = contentResolver.query(uri, filePathColumn, null, null, null)
-        cursor?.moveToFirst()
-        val columnIndex = cursor?.getColumnIndex(filePathColumn[0]) ?: 0
-        val filePath = cursor?.getString(columnIndex)
-        cursor?.close()
-        return File(filePath ?: "")
+    private fun showImagePickerDialog() {
+        val options = arrayOf("Kamera", "Galeri")
+        AlertDialog.Builder(this)
+            .setTitle("Pilih Gambar")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> openCamera()
+                    1 -> openGallery()
+                }
+            }
+            .show()
+    }
+
+    private fun openCamera() {
+        if (checkSelfPermission(android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(android.Manifest.permission.CAMERA), REQUEST_CAMERA)
+            return
+        }
+
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val photoFile = createImageFile()
+        val photoURI: Uri = FileProvider.getUriForFile(
+            this,
+            "${packageName}.fileprovider",
+            photoFile
+        )
+        cameraImageFile = photoFile // simpan sementara
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        startActivityForResult(intent, REQUEST_CAMERA)
+    }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_GALLERY)
+    }
+
+    private fun createImageFile(): File {
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir).apply {
+            currentPhotoPath = absolutePath
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                REQUEST_CAMERA -> {
+                    cameraImageFile?.let {
+                        selectedImageFile = it
+                        binding.imgPreview.setImageURI(Uri.fromFile(it))
+                    }
+                }
+                REQUEST_GALLERY -> {
+                    val uri = data?.data ?: return
+                    selectedImageFile = uriToFile(uri, this)
+                    binding.imgPreview.setImageURI(uri)
+                }
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CAMERA && grantResults.isNotEmpty()
+            && grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {
+            openCamera()
+        } else {
+            Toast.makeText(this, "Izin kamera dibutuhkan", Toast.LENGTH_SHORT).show()
+        }
     }
 }

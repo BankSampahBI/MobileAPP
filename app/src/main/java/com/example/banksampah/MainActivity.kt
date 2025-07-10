@@ -3,57 +3,77 @@ package com.example.banksampah
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.banksampah.databinding.ActivityMainBinding
+import com.example.banksampah.ui.StartActivity
 import com.example.banksampah.ui.model.MainViewModel
 import com.example.banksampah.ui.model.ViewModelFactory
-import com.example.banksampah.ui.StartActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.NavGraph
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
     private val mainViewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(this)
     }
 
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mainViewModel.getSession().observe(this) { user ->
-            if (!user.isLogin) {
-                startActivity(Intent(this, StartActivity::class.java))
-                finish()
-            }
-        }
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
-
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_cart, R.id.navigation_home, R.id.navigation_profile
-            )
-        )
-
         supportActionBar?.hide()
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                         or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_FULLSCREEN
                 )
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        val navView: BottomNavigationView = binding.navView
+
+        mainViewModel.getSession().observe(this) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(this, StartActivity::class.java))
+                finish()
+            } else {
+                val role = user.role
+                Toast.makeText(this, "Login sebagai: $role", Toast.LENGTH_SHORT).show()
+
+                val navInflater = navController.navInflater
+                val navGraph: NavGraph = navInflater.inflate(R.navigation.mobile_navigation)
+
+                // 🔀 Set start destination tergantung role
+                val startDestination = if (role == "konsumen") {
+                    navGraph.findNode(R.id.navigation_konsumen_home)?.id
+                        ?: R.id.navigation_konsumen_home
+                } else {
+                    navGraph.findNode(R.id.navigation_home)?.id
+                        ?: R.id.navigation_home
+                }
+                navGraph.setStartDestination(startDestination)
+                navController.graph = navGraph
+
+                // Ganti BottomNavigationView menu sesuai role
+                if (role == "konsumen") {
+                    navView.menu.clear()
+                    navView.inflateMenu(R.menu.bottom_nav_konsumen)
+                } else {
+                    navView.menu.clear()
+                    navView.inflateMenu(R.menu.bottom_nav_menu)
+                }
+
+                // Hubungkan navController ke BottomNavigationView
+                navView.setupWithNavController(navController)
+            }
+        }
     }
 }

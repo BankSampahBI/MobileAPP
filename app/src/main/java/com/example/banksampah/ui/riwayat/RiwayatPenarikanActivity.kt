@@ -3,60 +3,51 @@ package com.example.banksampah.ui.riwayat
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.banksampah.MainActivity
 import com.example.banksampah.R
-import com.example.banksampah.ui.model.RiwayatPenarikan
 import com.example.banksampah.ui.adapter.ListRiwayatPenarikanAdapter
+import com.example.banksampah.ui.model.RiwayatPenarikanViewModel
+import com.example.banksampah.ui.model.ViewModelFactory
 
 class RiwayatPenarikanActivity : AppCompatActivity() {
 
     private lateinit var rvRiwayatPenarikan: RecyclerView
-    private val list = ArrayList<RiwayatPenarikan>()
+    private lateinit var adapter: ListRiwayatPenarikanAdapter
+    private lateinit var viewModel: RiwayatPenarikanViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_riwayat_penarikan)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
+        // Init adapter
+        adapter = ListRiwayatPenarikanAdapter()
         rvRiwayatPenarikan = findViewById(R.id.rv_riwayatPenarikan)
-        rvRiwayatPenarikan.setHasFixedSize(true)
         rvRiwayatPenarikan.layoutManager = LinearLayoutManager(this)
+        rvRiwayatPenarikan.adapter = adapter
 
-        list.addAll(getListRiwayatPenarikan())
-        rvRiwayatPenarikan.adapter = ListRiwayatPenarikanAdapter(list)
+        // Init ViewModel pakai factory
+        viewModel = ViewModelFactory.getInstance(this)
+            .create(RiwayatPenarikanViewModel::class.java)
 
-        val btnNext: ImageView = findViewById(R.id.iv_next)
-        btnNext.setOnClickListener {
-            val intent = Intent(this, RiwayatPenyetoranActivity::class.java)
-            startActivity(intent)
+        // Observe data dari ViewModel
+        viewModel.riwayat.observe(this) { list ->
+            if (list.isNotEmpty()) {
+                adapter.setData(list)
+            }
         }
 
-        val btnBack: ImageView = findViewById(R.id.iv_back)
-        btnBack.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-    }
+        viewModel.getRiwayat()
 
-    private fun getListRiwayatPenarikan(): ArrayList<RiwayatPenarikan> {
-        val tanggal = resources.getStringArray(R.array.tanggal_penarikan)
-        val jumlah = resources.getStringArray(R.array.jumlah_penarikan)
-
-        val listRiwayat = ArrayList<RiwayatPenarikan>()
-        for (i in jumlah.indices) {
-            listRiwayat.add(RiwayatPenarikan(jumlah[i], tanggal[i]))
+        // Tombol next dan back
+        findViewById<ImageView>(R.id.iv_next).setOnClickListener {
+            startActivity(Intent(this, RiwayatPenyetoranActivity::class.java))
         }
-        return listRiwayat
+
+        findViewById<ImageView>(R.id.iv_back).setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 }

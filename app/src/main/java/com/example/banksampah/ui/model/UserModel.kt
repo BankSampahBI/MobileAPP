@@ -5,5 +5,6 @@ data class UserModel(
     val email: String,
     val token: String,
     val isLogin: Boolean,
-    val role: String = ""
+    val role: String = "",
+    val saldo: Int = 0 // ✅ Tambahkan ini
 )

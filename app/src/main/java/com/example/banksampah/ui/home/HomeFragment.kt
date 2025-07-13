@@ -5,25 +5,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.banksampah.R
 import com.example.banksampah.data.Result
+import com.example.banksampah.databinding.FragmentHomeBinding
 import com.example.banksampah.ui.adapter.ListBeritaAdapter
 import com.example.banksampah.ui.adapter.ListKatalogAdapter
 import com.example.banksampah.ui.model.ViewModelFactory
 import com.example.banksampah.ui.notifikasi.NotifikasiActivity
 import com.example.banksampah.ui.penarikan.PenarikanActivity
 import com.example.banksampah.ui.riwayat.RiwayatPenarikanActivity
+import java.text.NumberFormat
 
 class HomeFragment : Fragment() {
 
-    private lateinit var rvKatalog: RecyclerView
-    private lateinit var rvBerita: RecyclerView
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var katalogAdapter: ListKatalogAdapter
     private lateinit var beritaAdapter: ListBeritaAdapter
 
@@ -31,24 +31,32 @@ class HomeFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tvUsername: TextView = view.findViewById(R.id.tv_username)
-
+        // Username
         viewModel.getSession().observe(viewLifecycleOwner) { user ->
-            tvUsername.text = " ${user.name}"
+            binding.tvUsername.text = " ${user.name}"
+            viewModel.getSaldo(user.token)
+        }
+
+        // Tampilkan saldo
+        viewModel.saldo.observe(viewLifecycleOwner) { saldo ->
+            val formatted = NumberFormat.getInstance().format(saldo)
+            binding.textView10.text = "Rp. $formatted"
         }
 
         // Katalog
-        rvKatalog = view.findViewById(R.id.rv_katalog)
-        rvKatalog.layoutManager = LinearLayoutManager(requireContext())
         katalogAdapter = ListKatalogAdapter()
-        rvKatalog.adapter = katalogAdapter
+        binding.rvKatalog.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvKatalog.adapter = katalogAdapter
 
         viewModel.getKatalog().observe(viewLifecycleOwner) { result ->
             when (result) {
@@ -59,10 +67,9 @@ class HomeFragment : Fragment() {
         }
 
         // Berita
-        rvBerita = view.findViewById(R.id.rv_berita)
-        rvBerita.layoutManager = LinearLayoutManager(requireContext())
         beritaAdapter = ListBeritaAdapter(arrayListOf())
-        rvBerita.adapter = beritaAdapter
+        binding.rvBerita.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvBerita.adapter = beritaAdapter
 
         viewModel.getBerita().observe(viewLifecycleOwner) { result ->
             when (result) {
@@ -72,14 +79,28 @@ class HomeFragment : Fragment() {
             }
         }
 
-        view.findViewById<View>(R.id.btn_notification).setOnClickListener {
+        // Tombol
+        binding.btnNotification.setOnClickListener {
             startActivity(Intent(requireContext(), NotifikasiActivity::class.java))
         }
-        view.findViewById<View>(R.id.btn_tarik).setOnClickListener {
+        binding.btnTarik.setOnClickListener {
             startActivity(Intent(requireContext(), PenarikanActivity::class.java))
         }
-        view.findViewById<View>(R.id.btn_riwayat).setOnClickListener {
+        binding.btnRiwayat.setOnClickListener {
             startActivity(Intent(requireContext(), RiwayatPenarikanActivity::class.java))
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getSession().observe(viewLifecycleOwner) { user ->
+            viewModel.getSaldo(user.token)
+        }
+    }
+
 }

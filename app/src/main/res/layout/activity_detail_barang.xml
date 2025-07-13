@@ -1,63 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollViewDetail"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <!-- ScrollView agar kontennya bisa discroll -->
+    <ScrollView
+        android:id="@+id/scrollViewDetail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Gambar Barang -->
-        <ImageView
-            android:id="@+id/ivDetailFoto"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="Foto Barang"
-            android:background="@color/dark_green" />
+            android:layout_height="wrap_content">
 
-        <!-- Nama Barang -->
-        <TextView
-            android:id="@+id/tvDetailNamaBarang"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nama Barang"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
+            <!-- Gambar Barang -->
+            <ImageView
+                android:id="@+id/ivDetailFoto"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:background="@color/dark_green"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Harga -->
-        <TextView
-            android:id="@+id/tvDetailHarga"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rp 0"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="8dp" />
+            <!-- Nama Barang -->
+            <TextView
+                android:id="@+id/tvDetailNamaBarang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Nama Barang"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/ivDetailFoto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" />
 
-        <!-- Deskripsi -->
-        <TextView
-            android:id="@+id/tvDetailDeskripsi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Deskripsi lengkap barang..."
-            android:textSize="16sp"
-            android:layout_marginTop="12dp" />
+            <!-- Harga -->
+            <TextView
+                android:id="@+id/tvDetailHarga"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Rp 0"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailNamaBarang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
 
-        <!-- Tombol Beli -->
-        <Button
-            android:id="@+id/btnBeli"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Beli Sekarang"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/black"
-            android:textColor="@android:color/white" />
+            <!-- Deskripsi -->
+            <TextView
+                android:id="@+id/tvDetailDeskripsi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Deskripsi lengkap barang..."
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailHarga"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="12dp" />
 
-    </LinearLayout>
+            <!-- EditText Jumlah (hidden by default) -->
+            <EditText
+                android:id="@+id/etJumlah"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan jumlah"
+                android:inputType="number"
+                android:visibility="gone"
+                android:padding="12dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailDeskripsi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="12dp" />
 
-</ScrollView>
+            <!-- Tombol Aksi -->
+            <LinearLayout
+                android:id="@+id/button_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintTop_toBottomOf="@id/etJumlah"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <Button
+                    android:id="@+id/btnBeli"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Beli Sekarang"
+                    android:backgroundTint="@color/pale_green"
+                    android:textColor="@android:color/white" />
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btnSimpan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Simpan ke Keranjang"
+                    android:backgroundTint="@color/orange"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

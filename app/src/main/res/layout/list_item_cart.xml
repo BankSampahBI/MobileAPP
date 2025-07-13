@@ -3,11 +3,9 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    card_view:cardCornerRadius="25dp"
-    card_view:cardElevation="4dp"
-    android:layout_marginHorizontal="8dp"
-    card_view:cardBackgroundColor="@color/wgreen">
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,49 +13,57 @@
         android:orientation="horizontal"
         android:padding="12dp">
 
+        <!-- Gambar Barang -->
         <ImageView
-            android:id="@+id/img_barang"
+            android:id="@+id/imgBarang"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/botol_plastik"
-            android:contentDescription="Foto barang" />
+            android:src="@drawable/ic_launcher_background" />
 
+        <!-- Info Barang -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="12dp">
+            android:layout_marginStart="12dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_nama"
+            <!-- Checkbox di atas kanan -->
+            <CheckBox
+                android:id="@+id/checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dompet dari Kopi"
-                android:textStyle="bold"
-                android:textColor="@color/black"
+                android:layout_gravity="end"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Nama Barang -->
+            <TextView
+                android:id="@+id/tvNamaBarang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Barang"
                 android:textSize="16sp"
-                android:fontFamily="@font/poppins_bold" />
+                android:textStyle="bold"
+                android:textColor="@color/black" />
 
+            <!-- Harga -->
             <TextView
-                android:id="@+id/tv_harga"
+                android:id="@+id/tvHarga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rp 15.000"
+                android:text="Rp 0"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppins_regular" />
+                android:textSize="14sp" />
 
+            <!-- Jumlah -->
             <TextView
-                android:id="@+id/tv_status"
+                android:id="@+id/tvJumlah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Menunggu validasi"
-                android:textColor="@color/orange"
-                android:textSize="13sp"
-                android:fontFamily="@font/poppins_regular" />
+                android:text="Jumlah: 1"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

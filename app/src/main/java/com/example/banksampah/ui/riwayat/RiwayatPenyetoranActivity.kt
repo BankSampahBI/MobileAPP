@@ -1,22 +1,26 @@
 package com.example.banksampah.ui.riwayat
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.banksampah.R
-import com.example.banksampah.ui.model.RiwayatPenyetoran
+import com.example.banksampah.data.remote.response.DetailsItem
+import com.example.banksampah.data.remote.response.Data
 import com.example.banksampah.ui.adapter.ListRiwayatPenyetoranAdapter
+import com.example.banksampah.ui.model.RiwayatPenyetoranViewModel
+import com.example.banksampah.ui.model.ViewModelFactory
 
 class RiwayatPenyetoranActivity : AppCompatActivity() {
 
     private lateinit var rvRiwayatPenyetoran: RecyclerView
-    private val list = ArrayList<RiwayatPenyetoran>()
+    private lateinit var adapter: ListRiwayatPenyetoranAdapter
+    private lateinit var viewModel: RiwayatPenyetoranViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,29 +34,29 @@ class RiwayatPenyetoranActivity : AppCompatActivity() {
         }
 
         rvRiwayatPenyetoran = findViewById(R.id.rv_riwayatPenyetoran)
-        rvRiwayatPenyetoran.setHasFixedSize(true)
         rvRiwayatPenyetoran.layoutManager = LinearLayoutManager(this)
+        adapter = ListRiwayatPenyetoranAdapter()
+        rvRiwayatPenyetoran.adapter = adapter
 
-        list.addAll(getListRiwayatPenyetoran())
-        rvRiwayatPenyetoran.adapter = ListRiwayatPenyetoranAdapter(list)
+        val factory = ViewModelFactory.getInstance(applicationContext)
+        viewModel = ViewModelProvider(this, factory)[RiwayatPenyetoranViewModel::class.java]
 
-        val btnBack: ImageView = findViewById(R.id.iv_back)
-        btnBack.setOnClickListener {
-            val intent = Intent(this, RiwayatPenarikanActivity::class.java)
-            startActivity(intent)
+        viewModel.getSession().observe(this) { user ->
+            viewModel.fetchRiwayatSetoran(user.token)
         }
-    }
 
-    private fun getListRiwayatPenyetoran(): ArrayList<RiwayatPenyetoran> {
-        val jenis = resources.getStringArray(R.array.jenis_sampah)
-        val berat = resources.getStringArray(R.array.berat_sampah)
-        val tanggal = resources.getStringArray(R.array.tanggal_penyetoran)
-        val harga = resources.getStringArray(R.array.harga)
-
-        val listRiwayat = ArrayList<RiwayatPenyetoran>()
-        for (i in jenis.indices) {
-            listRiwayat.add(RiwayatPenyetoran(jenis[i], berat[i], tanggal[i], harga[i]))
+        viewModel.riwayatSetoran.observe(this) { dataList ->
+            val allDetails = mutableListOf<Triple<DetailsItem, String, Int>>() // detail, tanggal, saldo
+            dataList.forEach { data: Data ->
+                data.details.forEach { detail ->
+                    allDetails.add(Triple(detail, data.tanggal, data.saldo))
+                }
+            }
+            adapter.setData(allDetails)
         }
-        return listRiwayat
+
+        findViewById<ImageView>(R.id.iv_back).setOnClickListener {
+            finish()
+        }
     }
 }

@@ -4,14 +4,16 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.banksampah.data.Repository
-import com.example.banksampah.data.pref.UserPreference
 import com.example.banksampah.data.di.Injection
 import com.example.banksampah.ui.autentikasi.login.LoginViewModel
 import com.example.banksampah.ui.autentikasi.register.RegisterViewModel
 import com.example.banksampah.ui.cart.CartViewModel
 import com.example.banksampah.ui.cart.KonsumenCartViewModel
+import com.example.banksampah.ui.checkout.CheckoutViewModel
+import com.example.banksampah.ui.detail.viewmodel.DetailBarangViewModel
 import com.example.banksampah.ui.home.HomeViewModel
 import com.example.banksampah.ui.home.KonsumenHomeViewModel
+import com.example.banksampah.ui.penarikan.PenarikanViewModel
 import com.example.banksampah.ui.profile.ProfileViewModel
 
 class ViewModelFactory(
@@ -51,10 +53,34 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(KonsumenHomeViewModel::class.java) -> {
                 KonsumenHomeViewModel(repository) as T
             }
-//            modelClass.isAssignableFrom(KonsumenCartViewModel::class.java) -> {
-//                KonsumenCartViewModel(repository) as T
-//            }
 
+            modelClass.isAssignableFrom(DetailBarangViewModel::class.java) -> {
+                DetailBarangViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(KonsumenCartViewModel::class.java) -> {
+                KonsumenCartViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(DetailCartViewModel::class.java) -> {
+                DetailCartViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(CheckoutViewModel::class.java) -> {
+                CheckoutViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(PembelianViewModel::class.java) -> {
+                PembelianViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(RiwayatPenjualanViewModel::class.java) -> {
+                RiwayatPenjualanViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(RiwayatPenyetoranViewModel::class.java) -> {
+                RiwayatPenyetoranViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(PenarikanViewModel::class.java) -> {
+                PenarikanViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(RiwayatPenarikanViewModel::class.java) -> {
+                RiwayatPenarikanViewModel(repository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
     }

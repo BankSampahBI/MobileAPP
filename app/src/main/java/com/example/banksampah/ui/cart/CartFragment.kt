@@ -17,6 +17,7 @@ import com.example.banksampah.ui.adapter.ListPenjualanAdapter
 import com.example.banksampah.ui.add.AddPenjualanActivity
 import com.example.banksampah.ui.model.ViewModelFactory
 import com.example.banksampah.data.remote.response.PenjualanResponseItem
+import com.example.banksampah.ui.riwayat.RiwayatPenjualanActivity
 
 class CartFragment : Fragment() {
 
@@ -38,7 +39,11 @@ class CartFragment : Fragment() {
             startActivity(intent)
         }
 
-        // Observe session
+        binding.btnRiwayatPenjualan.setOnClickListener {
+            val intent = Intent(requireContext(), RiwayatPenjualanActivity::class.java)
+            startActivity(intent)
+        }
+
         Injection.provideUserPreference(requireContext()).getSession().asLiveData()
             .observe(viewLifecycleOwner) { user ->
                 val repository = Injection.provideRepository(requireContext(), user.token)

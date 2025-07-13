@@ -6,26 +6,40 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.banksampah.R
-import com.example.banksampah.ui.model.RiwayatPenarikan
+import com.example.banksampah.data.remote.response.DataPenarikan
+import java.text.NumberFormat
 
-class ListRiwayatPenarikanAdapter (private val listRiwayatPenarikan: ArrayList<RiwayatPenarikan>) : RecyclerView.Adapter<ListRiwayatPenarikanAdapter.ListViewHolder>() {
+class ListRiwayatPenarikanAdapter :
+    RecyclerView.Adapter<ListRiwayatPenarikanAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.list_item_riwayat_penarikan, parent, false)
-        return ListViewHolder(view)
+    private val list = ArrayList<DataPenarikan>()
+
+    fun setData(newList: List<DataPenarikan>) {
+        list.clear()
+        list.addAll(newList)
+        notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val (jumlah,tanggal) = listRiwayatPenarikan[position]
-        holder.tvJumlah.text = jumlah
-        holder.tvTanggal.text = tanggal
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.list_item_riwayat_penarikan, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = listRiwayatPenarikan.size
+    override fun getItemCount(): Int = list.size
 
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvJumlah: TextView = itemView.findViewById(R.id.tv_saldo)
-        val tvTanggal: TextView = itemView.findViewById(R.id.tv_tanggal)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val data = list[position]
+        holder.bind(data)
+    }
 
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val tvSaldo: TextView = view.findViewById(R.id.tv_saldo)
+        private val tvTanggal: TextView = view.findViewById(R.id.tv_tanggal)
+
+        fun bind(item: DataPenarikan) {
+            tvSaldo.text = "Rp. ${NumberFormat.getInstance().format(item.jumlah)}"
+            tvTanggal.text = item.createdAt.substring(0, 10) // ambil yyyy-MM-dd
+        }
     }
 }

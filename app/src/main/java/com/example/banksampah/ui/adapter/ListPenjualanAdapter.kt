@@ -54,7 +54,5 @@ class ListPenjualanAdapter(private val list: List<PenjualanResponseItem>) :
             intent.putExtra("EXTRA_PENJUALAN", item)
             holder.itemView.context.startActivity(intent)
         }
-
-
     }
 }
